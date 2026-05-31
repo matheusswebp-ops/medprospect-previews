@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dra. Ana Lima — Dermatologista em Fortaleza</title>
+  <meta name="description" content="Dra. Ana Lima, especialista em Dermatologista em Fortaleza. Agende sua consulta com facilidade." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Tokens ────────────────────────────────────────────── */
+    :root {
+      --accent:       #EC4899;
+      --accent-dark:  color-mix(in srgb, #EC4899 70%, #000);
+      --accent-light: color-mix(in srgb, #EC4899 15%, #fff);
+      --accent-glow:  color-mix(in srgb, #EC4899 20%, transparent);
+
+      --bg:        #FAFAFA;
+      --surface:   #FFFFFF;
+      --dark:      #0F172A;
+      --text:      #1E293B;
+      --muted:     #64748B;
+      --border:    #E2E8F0;
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.07);
+      --shadow-lg: 0 20px 50px rgba(0,0,0,.12);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navbar ────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 68px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -.01em;
+    }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem 1.25rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      font-size: .875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .nav-cta:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex; align-items: center;
+      padding: 100px clamp(1.5rem, 5vw, 4rem) 60px;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, var(--accent-light), transparent),
+        linear-gradient(160deg, #fff 0%, var(--bg) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 4rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .375rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: .75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .625rem;
+      padding: .875rem 2rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .625rem;
+      padding: .875rem 1.75rem;
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-weight: 500; font-size: 1rem;
+      text-decoration: none;
+      transition: border-color .2s, color .2s, transform .15s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .hero-stats {
+      display: flex; gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .hero-stat-value {
+      font-family: var(--font-serif);
+      font-size: 1.75rem; font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .25rem;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-photo {
+      width: clamp(200px, 28vw, 360px);
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: block;
+    }
+    .hero-photo-placeholder {
+      width: clamp(200px, 28vw, 360px);
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--accent-light), color-mix(in srgb, var(--accent) 30%, white));
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-photo-placeholder svg { opacity: .4; }
+    .hero-photo-placeholder span {
+      font-size: .875rem; color: var(--accent);
+      font-weight: 500; text-align: center; padding: 0 1rem;
+    }
+    .hero-badge-float {
+      position: absolute; bottom: -1rem; left: -1.5rem;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: .875rem 1.25rem;
+      box-shadow: var(--shadow-md);
+      display: flex; align-items: center; gap: .75rem;
+      min-width: 200px;
+    }
+    .badge-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-icon svg { color: var(--accent); width: 20px; height: 20px; }
+    .badge-text-title { font-size: .8125rem; font-weight: 600; color: var(--dark); }
+    .badge-text-sub   { font-size: .75rem; color: var(--muted); }
+
+    /* ── Section shared ────────────────────────────────────── */
+    .section { padding: 80px clamp(1.5rem, 5vw, 4rem); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.0625rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── Serviços ──────────────────────────────────────────── */
+    .services { background: var(--surface); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .service-card {
+      padding: 1.75rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--accent-light);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .service-icon svg { color: var(--accent); width: 24px; height: 24px; }
+    .service-title {
+      font-weight: 700; font-size: .9375rem;
+      color: var(--dark); margin-bottom: .5rem;
+    }
+    .service-desc { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Sobre ─────────────────────────────────────────────── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin-top: 1rem;
+    }
+    .about-image {
+      position: relative;
+    }
+    .about-img-bg {
+      width: 100%; aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--accent-light), color-mix(in srgb, var(--accent) 25%, white));
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-img-bg svg { opacity: .25; width: 80px; height: 80px; color: var(--accent); }
+    .about-accent-block {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .about-accent-num {
+      font-family: var(--font-serif);
+      font-size: 2rem; font-weight: 700;
+      line-height: 1;
+    }
+    .about-accent-label { font-size: .75rem; margin-top: .25rem; opacity: .85; }
+    .about-text p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-list {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    .about-list li {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .9375rem; color: var(--text); font-weight: 500;
+    }
+    .about-list-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+
+    /* ── Depoimentos ───────────────────────────────────────── */
+    .testimonials { background: var(--dark); color: #fff; }
+    .testimonials .section-title { color: #fff; }
+    .testimonials .section-label { color: var(--accent); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      padding: 1.75rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-md);
+    }
+    .testimonial-stars {
+      display: flex; gap: .25rem; margin-bottom: 1rem;
+    }
+    .testimonial-stars svg { color: #FBBF24; width: 16px; height: 16px; }
+    .testimonial-text {
+      font-size: .9375rem; color: rgba(255,255,255,.8);
+      line-height: 1.7; margin-bottom: 1.25rem;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: .75rem; }
+    .testimonial-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; color: var(--accent);
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-size: .875rem; font-weight: 600; color: #fff; }
+    .testimonial-role { font-size: .75rem; color: rgba(255,255,255,.5); }
+
+    /* ── CTA ───────────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      text-align: center;
+    }
+    .cta-section .section-title { color: #fff; }
+    .cta-section .section-sub { color: rgba(255,255,255,.85); margin: 0 auto 2.5rem; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: .625rem;
+      padding: .875rem 2rem;
+      background: #fff;
+      color: var(--accent);
+      border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 1rem;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: .625rem;
+      padding: .875rem 1.75rem;
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.6);
+      border-radius: var(--radius-sm);
+      font-weight: 500; font-size: 1rem;
+      text-decoration: none;
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .btn-outline-white:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── Localização ───────────────────────────────────────── */
+    .location-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .location-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .location-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .location-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .location-icon svg { color: var(--accent); width: 20px; height: 20px; }
+    .location-item-title { font-weight: 600; font-size: .9375rem; color: var(--dark); }
+    .location-item-text { font-size: .875rem; color: var(--muted); margin-top: .25rem; line-height: 1.5; }
+    .location-map {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      aspect-ratio: 4/3;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .location-map-placeholder {
+      text-align: center; padding: 2rem;
+    }
+    .location-map-placeholder svg { color: var(--accent); opacity: .4; margin-bottom: .75rem; }
+    .location-map-placeholder p { font-size: .875rem; color: var(--muted); }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.5);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      text-align: center;
+      font-size: .8125rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── WhatsApp flutuante ────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 999;
+      width: 60px; height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      animation: wa-pulse 3s ease-in-out infinite;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,.5);
+    }
+    .wa-float svg { color: #fff; width: 30px; height: 30px; }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); }
+      50%       { box-shadow: 0 4px 30px rgba(37,211,102,.6), 0 0 0 8px rgba(37,211,102,.1); }
+    }
+
+    /* ── Preview banner (removido em produção) ─────────────── */
+    .preview-banner {
+      background: linear-gradient(90deg, #7C3AED, #A855F7);
+      color: #fff;
+      text-align: center;
+      padding: .625rem 1rem;
+      font-size: .8125rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+    .preview-banner a { color: #E9D5FF; text-decoration: underline; }
+
+    /* ── Responsivo ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-inner       { grid-template-columns: 1fr; }
+      .hero-photo-wrap  { display: none; }
+      .about-grid       { grid-template-columns: 1fr; }
+      .about-accent-block { display: none; }
+      .location-inner   { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preview banner (gerado automaticamente — remover em produção) -->
+  <div class="preview-banner">
+    🎨 Este é um preview gratuito criado especialmente para <strong>Clínica DermaCare</strong>.
+    Gostou? <a href="https://wa.me/5585999999999?text=Olá, vi o preview do meu site e quero saber mais">Fale conosco</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="nav-logo">Dr. a. Lima</div>
+    <a href="https://wa.me/5585991112222?text=Olá, gostaria de agendar uma consulta" class="nav-cta">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.59 2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Agendar consulta
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Dermatologista • Fortaleza
+        </div>
+        <h1 class="hero-title">
+          Cuidado e excelência<br />
+          com <span>Dr. a. Lima</span>
+        </h1>
+        <p class="hero-sub">
+          Clínica DermaCare — referência em Dermatologista em Fortaleza.
+          Consultas presenciais com atendimento personalizado e humanizado.
+        </p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5585991112222?text=Olá, gostaria de agendar uma consulta" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Agendar consulta
+          </a>
+          <a href="https://wa.me/5585991112222" class="btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar pelo WhatsApp
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-value">4.8★</div>
+            <div class="hero-stat-label">Nota no Google</div>
+          </div>
+          <div>
+            <div class="hero-stat-value">10+</div>
+            <div class="hero-stat-label">Anos de experiência</div>
+          </div>
+          <div>
+            <div class="hero-stat-value">500+</div>
+            <div class="hero-stat-label">Pacientes atendidos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-photo-wrap">
+        
+    <div class="hero-photo-placeholder">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Foto do profissional<br/>em breve</span>
+    </div>
+  
+        <div class="hero-badge-float">
+          <div class="badge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div>
+            <div class="badge-text-title">Disponível para consultas</div>
+            <div class="badge-text-sub">Agende pelo WhatsApp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section class="section services">
+    <div class="section-inner">
+      <div class="section-label">O que oferecemos</div>
+      <h2 class="section-title">Serviços especializados</h2>
+      <p class="section-sub">Atendimento de qualidade com foco no bem-estar e na saúde dos nossos pacientes.</p>
+
+      <div class="services-grid">
+        
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </div>
+      <div class="service-title">Dermatologia Clínica</div>
+      <div class="service-desc">Diagnóstico e tratamento de doenças da pele, cabelo e unhas.</div>
+    </div>
+  
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="service-title">Dermatologia Estética</div>
+      <div class="service-desc">Botox, preenchimentos, peelings e procedimentos rejuvenescedores.</div>
+    </div>
+  
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="service-title">Dermatoscopia</div>
+      <div class="service-desc">Exame especializado para diagnóstico precoce de lesões de pele.</div>
+    </div>
+  
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="service-title">Laser e Tecnologia</div>
+      <div class="service-desc">Tratamentos com laser para manchas, cicatrizes e rejuvenescimento.</div>
+    </div>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-image">
+          <div class="about-img-bg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="about-accent-block">
+            <div class="about-accent-num">4.8★</div>
+            <div class="about-accent-label">Avaliação Google</div>
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="section-label">Sobre nós</div>
+          <h2 class="section-title">Clínica DermaCare</h2>
+          <p>Com anos de experiência em Dermatologista, Dr. a. Lima e a equipe da Clínica DermaCare oferecem atendimento personalizado e humanizado em Fortaleza.</p>
+          <p>Nossa missão é proporcionar saúde e qualidade de vida com tecnologia de ponta e um cuidado único para cada paciente.</p>
+          <ul class="about-list">
+            <li><span class="about-list-dot"></span> Atendimento personalizado e humanizado</li>
+            <li><span class="about-list-dot"></span> Equipamentos modernos e atualizados</li>
+            <li><span class="about-list-dot"></span> Equipe qualificada e experiente</li>
+            <li><span class="about-list-dot"></span> Localização central em Fortaleza</li>
+          </ul>
+          <a href="https://wa.me/5585991112222?text=Gostaria de saber mais sobre os serviços" class="btn-primary" style="width:fit-content">
+            Saber mais
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="section testimonials">
+    <div class="section-inner">
+      <div class="section-label">Depoimentos</div>
+      <h2 class="section-title">O que nossos pacientes dizem</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Atendimento impecável, profissional muito atencioso. Me senti acolhida desde o primeiro contato. Recomendo demais!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AC</div>
+            <div>
+              <div class="testimonial-name">Ana C.</div>
+              <div class="testimonial-role">Paciente</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Consultório moderno, equipe educada e resultado excelente. Foi muito além das minhas expectativas. Já indiquei para toda a família."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RM</div>
+            <div>
+              <div class="testimonial-name">Ricardo M.</div>
+              <div class="testimonial-role">Paciente</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-text">"Fui indicada e não me arrependo. Tratamento eficiente, agendamento fácil pelo WhatsApp e um atendimento humano que faz a diferença."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JS</div>
+            <div>
+              <div class="testimonial-name">Juliana S.</div>
+              <div class="testimonial-role">Paciente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="section-inner" style="text-align:center">
+      <div class="section-label" style="color:rgba(255,255,255,.7)">Pronto para começar?</div>
+      <h2 class="section-title" style="max-width:600px;margin:0 auto .75rem">Agende sua consulta hoje mesmo</h2>
+      <p class="section-sub">Atendemos em Av. Santos Dumont, 1200, Aldeota. Entre em contato pelo WhatsApp e garanta sua consulta com facilidade.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/5585991112222?text=Olá, gostaria de agendar uma consulta" class="btn-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar pelo WhatsApp
+        </a>
+        <a href="tel:(85) 99111-2222" class="btn-outline-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.59 2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Ligar agora
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Localização -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Como nos encontrar</div>
+      <h2 class="section-title">Localização</h2>
+      <div class="location-inner">
+        <div class="location-info">
+          <div class="location-item">
+            <div class="location-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="location-item-title">Endereço</div>
+              <div class="location-item-text">Av. Santos Dumont, 1200, Aldeota</div>
+            </div>
+          </div>
+          <div class="location-item">
+            <div class="location-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.59 2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="location-item-title">Telefone / WhatsApp</div>
+              <div class="location-item-text">(85) 99111-2222</div>
+            </div>
+          </div>
+          <div class="location-item">
+            <div class="location-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="location-item-title">Horário de atendimento</div>
+              <div class="location-item-text">Segunda a sexta: 8h às 18h<br />Sábado: 8h às 12h</div>
+            </div>
+          </div>
+        </div>
+        <div class="location-map">
+          <div class="location-map-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <p>Clínica DermaCare<br />Av. Santos Dumont, 1200, Aldeota</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Clínica DermaCare — Dermatologista em Fortaleza. Todos os direitos reservados.</p>
+    <p style="margin-top:.5rem">Desenvolvido por <a href="https://wa.me/5585999999999">MedProspect</a></p>
+  </footer>
+
+  <!-- WhatsApp flutuante -->
+  <a href="https://wa.me/5585991112222?text=Olá, gostaria de agendar uma consulta" class="wa-float" aria-label="Falar pelo WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+</body>
+</html>
