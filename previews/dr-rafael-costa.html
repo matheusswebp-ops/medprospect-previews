@@ -118,11 +118,11 @@ h2 span{color:var(--c)}
 .about{background:#fff}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .about-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.about-photo{border-radius:var(--radius);overflow:hidden}
+.about-photo{border-radius:var(--radius);overflow:hidden;min-height:240px}
 .about-photo:first-child{margin-top:36px}
 .about-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .about-photo:hover img{transform:scale(1.03)}
-.about-photo-ph{width:100%;height:100%;background:var(--c50);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:220px}
+.about-photo-ph{width:100%;height:240px;display:block;background:rgba(20,184,166,0.35)}
 .about-content h2{margin-bottom:14px}
 .about-content p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:18px}
 .about-checks{display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
@@ -291,7 +291,7 @@ footer{background:#07272d;padding:48px 0 24px}
   .about-checks{align-items:center}
   .about-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .about-photo:first-child{margin-top:0}
-  .about-photo,.about-photo-ph{min-height:180px}
+  .about-photo,.about-photo-ph{min-height:180px;height:180px}
   .about-grid{grid-template-columns:1fr}
 
   /* serviços */
